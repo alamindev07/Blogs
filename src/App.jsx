@@ -11,18 +11,26 @@ function App() {
 
   const handleBookMark =(blog)=>{
     console.log("bookmak button clicked",blog.id);
-    const newBookmark= [...bookMark, blog];
+    const isAlreadyBookMarked = bookMark.find(b => b.id ===blog.id);
+    if(!isAlreadyBookMarked){
+      const newBookmark= [...bookMark, blog];
     setBookMark(newBookmark);
+    }
+
+    
   };
 
-  const handleRemoveBookMark =()=>{
-    
+  const handleRemoveBookMark =(id)=>{
+  const remainingBookmark = bookMark.filter( blog => blog.id !== id);
+  setBookMark(remainingBookmark)
   }
 
   const handleReaidngCoungt =(blog)=>{
     const newRedingTime = readingTime + blog.reading_time;
     setReadingTime(newRedingTime);
-    console.log("blog:", newRedingTime)
+    // console.log("blog:", newRedingTime)
+
+  handleRemoveBookMark(blog.id)
   }
 
   return (
